@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin CMS — IKAPTRI Tourism Fair 2027</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ============================== NOT CONFIGURED NOTICE ============================== -->
+  <div class="admin-notice" data-admin-not-configured hidden>
+    <div class="admin-notice__box">
+      <h1>Supabase Belum Dikonfigurasi</h1>
+      <p>
+        Admin CMS ini butuh koneksi ke Supabase supaya bisa nyimpen perubahan.
+        Isi <code>SUPABASE_URL</code> dan <code>SUPABASE_ANON_KEY</code> di
+        <code>js/supabase-config.js</code>, lalu tambahkan script CDN Supabase
+        di <code>admin.html</code> (lihat komentar di dalam file itu).
+      </p>
+      <p>Sampai itu diisi, website utama tetap jalan normal pakai data dari <code>js/data.js</code>.</p>
+    </div>
+  </div>
+
+  <!-- ============================== LOGIN SCREEN ============================== -->
+  <div class="admin-login" data-admin-login hidden>
+    <form class="admin-login__card" data-login-form>
+      <img src="assets/images/logo.png" alt="IKAPTRI Tourism Fair 2027" class="admin-login__logo" />
+      <h1>Admin CMS</h1>
+      <p class="admin-login__sub">IKAPTRI Tourism Fair 2027</p>
+      <div class="form-field">
+        <label for="admin-email">Email</label>
+        <input type="email" id="admin-email" name="email" required autocomplete="username" />
+      </div>
+      <div class="form-field">
+        <label for="admin-password">Password</label>
+        <input type="password" id="admin-password" name="password" required autocomplete="current-password" />
+      </div>
+      <p class="admin-login__error" data-login-error></p>
+      <button type="submit" class="admin-btn admin-btn--primary" data-login-btn>Masuk</button>
+    </form>
+  </div>
+
+  <!-- ============================== DASHBOARD ============================== -->
+  <div class="admin-dashboard" data-admin-dashboard hidden>
+
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__brand">
+        <img src="assets/images/logo.png" alt="IKAPTRI" />
+        <span>Admin CMS</span>
+      </div>
+      <nav class="admin-nav">
+        <button class="admin-nav__item is-active" data-nav="hero">🖼️ Hero Background</button>
+        <button class="admin-nav__item" data-nav="mediakit">🗂️ Media Kit</button>
+        <button class="admin-nav__item" data-nav="program">📅 Program Acara</button>
+        <button class="admin-nav__item" data-nav="countdown" hidden>⏱️ Countdown &amp; Info Acara</button>
+        <button class="admin-nav__item" data-nav="contacts">📇 Contact Persons</button>
+        <button class="admin-nav__item" data-nav="news">📰 News</button>
+        <button class="admin-nav__item" data-nav="gallery">🖼️ Gallery</button>
+        <button class="admin-nav__item" data-nav="registrations">📋 Registrasi Peserta</button>
+      </nav>
+      <button class="admin-sidebar__logout" data-logout-btn>Keluar</button>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- HERO -->
+      <section class="admin-panel is-active" data-panel="hero">
+        <div class="admin-panel__head">
+          <h2>Hero Background</h2>
+          <p>Foto slider di halaman Beranda. Logo, tagline, dan teks lain di hero <strong>tidak bisa</strong> diubah dari sini — itu bagian dari desain tetap.</p>
+        </div>
+        <div class="admin-upload">
+          <label class="admin-btn admin-btn--primary">
+            + Upload Foto Baru
+            <input type="file" accept="image/*" data-hero-upload hidden />
+          </label>
+          <span class="admin-upload__hint">Format JPG/PNG, disarankan rasio landscape (mis. 1920×1080)</span>
+        </div>
+        <div class="admin-list" data-hero-list></div>
+      </section>
+
+      <!-- MEDIA KIT -->
+      <section class="admin-panel" data-panel="mediakit">
+        <div class="admin-panel__head">
+          <h2>Media Kit</h2>
+          <p>File yang bisa didownload pengunjung di halaman Media (Brochure, E-Flyer, Floor Plan, Company Profile). Format bebas — PDF, DOCX, PPTX, JPG, dll.</p>
+        </div>
+        <div class="admin-list" data-mediakit-list></div>
+      </section>
+
+      <!-- PROGRAM ACARA -->
+      <section class="admin-panel" data-panel="program">
+        <div class="admin-panel__head">
+          <h2>Program Acara</h2>
+          <p>Kalau belum ada sesi ditambahkan, halaman Program di website tetap tampil badge "(TBA)". Begitu ada 1 sesi tersimpan, otomatis ganti jadi tampilan jadwal.</p>
+        </div>
+        <form class="admin-form" data-program-form>
+          <h3>Tambah Sesi</h3>
+          <div class="form-field">
+            <label>Hari (mis. "Hari 1 — 29 Januari 2027")</label>
+            <input type="text" name="day_label" data-pg-day required />
+          </div>
+          <div class="form-field">
+            <label>Jam (mis. "09:00 - 10:00")</label>
+            <input type="text" name="time_label" data-pg-time />
+          </div>
+          <div class="form-field">
+            <label>Judul Sesi</label>
+            <input type="text" name="title" data-pg-title required />
+          </div>
+          <div class="form-field">
+            <label>Deskripsi (opsional)</label>
+            <textarea name="description" data-pg-desc rows="2"></textarea>
+          </div>
+          <button type="submit" class="admin-btn admin-btn--primary">+ Tambah Sesi</button>
+        </form>
+        <div class="admin-list" data-program-list style="margin-top:20px"></div>
+      </section>
+
+      <!-- COUNTDOWN & EVENT INFO -->
+      <section class="admin-panel" data-panel="countdown">
+        <div class="admin-panel__head">
+          <h2>Countdown &amp; Info Acara</h2>
+          <p>Tanggal target hitung mundur, dan info tanggal/venue yang tampil di beberapa halaman.</p>
+        </div>
+        <form class="admin-form" data-countdown-form>
+          <h3>Countdown</h3>
+          <div class="form-field">
+            <label>Label (mis. "Menuju")</label>
+            <input type="text" name="label" data-cd-label />
+          </div>
+          <div class="form-field">
+            <label>Nama Event</label>
+            <input type="text" name="eventName" data-cd-eventname />
+          </div>
+          <div class="form-field">
+            <label>Target Tanggal &amp; Jam (WIB)</label>
+            <input type="datetime-local" name="targetDate" data-cd-target />
+          </div>
+
+          <h3>Info Acara</h3>
+          <div class="form-field">
+            <label>Tanggal (teks tampilan, mis. "29-30 Januari 2027")</label>
+            <input type="text" name="dateLabel" data-ev-datelabel />
+          </div>
+          <div class="form-field">
+            <label>Venue</label>
+            <input type="text" name="venue" data-ev-venue />
+          </div>
+
+          <button type="submit" class="admin-btn admin-btn--primary">Simpan Perubahan</button>
+          <span class="admin-form__status" data-countdown-status></span>
+        </form>
+      </section>
+
+      <!-- CONTACT PERSONS -->
+      <section class="admin-panel" data-panel="contacts">
+        <div class="admin-panel__head">
+          <h2>Contact Persons</h2>
+          <p>Muncul di footer semua halaman.</p>
+        </div>
+        <button class="admin-btn admin-btn--primary" data-contact-add>+ Tambah Contact Person</button>
+        <div class="admin-list" data-contact-list></div>
+      </section>
+
+      <!-- NEWS -->
+      <section class="admin-panel" data-panel="news">
+        <div class="admin-panel__head">
+          <h2>News</h2>
+          <p>Muncul di halaman Media.</p>
+        </div>
+        <form class="admin-form" data-news-form>
+          <h3>Tambah News</h3>
+          <div class="form-field">
+            <label>Judul</label>
+            <input type="text" name="title" data-news-title required />
+          </div>
+          <div class="form-field">
+            <label>Ringkasan (tampil di card)</label>
+            <textarea name="excerpt" data-news-excerpt rows="2"></textarea>
+          </div>
+          <div class="form-field">
+            <label>Isi Lengkap (muncul saat card diklik)</label>
+            <textarea name="content" data-news-content rows="6"></textarea>
+          </div>
+          <div class="form-field">
+            <label>Foto (opsional)</label>
+            <input type="file" accept="image/*" data-news-image />
+          </div>
+          <button type="submit" class="admin-btn admin-btn--primary">+ Tambah News</button>
+          <span class="admin-form__status" data-news-status></span>
+        </form>
+        <div class="admin-list" data-news-list style="margin-top:20px"></div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="admin-panel" data-panel="gallery">
+        <div class="admin-panel__head">
+          <h2>Gallery</h2>
+          <p>Muncul di halaman Media.</p>
+        </div>
+        <div class="admin-upload">
+          <label class="admin-btn admin-btn--primary">
+            + Upload Foto Gallery
+            <input type="file" accept="image/*" data-gallery-upload hidden />
+          </label>
+        </div>
+        <div class="admin-list admin-list--grid" data-gallery-list></div>
+      </section>
+
+      <!-- REGISTRATIONS -->
+      <section class="admin-panel" data-panel="registrations">
+        <div class="admin-panel__head">
+          <h2>Registrasi Peserta</h2>
+          <p>Data yang masuk dari form Registrasi Peserta di website.</p>
+        </div>
+        <button class="admin-btn" data-registrations-export>⬇ Export CSV</button>
+        <div class="admin-table-wrap">
+          <table class="admin-table" data-registrations-table>
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Nama</th>
+                <th>Email</th>
+                <th>WhatsApp</th>
+                <th>Perusahaan</th>
+                <th>Kategori</th>
+                <th>Catatan</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============================================================
+       Supabase JS SDK — WAJIB di-uncomment begitu SUPABASE_URL &
+       SUPABASE_ANON_KEY di js/supabase-config.js sudah diisi.
+       Tanpa baris ini, admin CMS cuma nampilin notice "belum
+       dikonfigurasi" di atas.
+  ============================================================= -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="js/data.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

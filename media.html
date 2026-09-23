@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media — IKAPTRI Tourism Fair 2027</title>
+  <meta name="description" content="Media kit, berita, dan galeri foto IKAPTRI Tourism Fair 2027. Brosur, e-flyer, floor plan, dan company profile tersedia untuk diunduh." />
+  <link rel="canonical" href="https://ikaptritourismfair.com/media" />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png" />
+  <link rel="apple-touch-icon" href="/assets/images/favicon-180.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0e4182" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="IKAPTRI Tourism Fair 2027" />
+  <meta property="og:title" content="Media — IKAPTRI Tourism Fair 2027" />
+  <meta property="og:description" content="Media kit, berita, dan galeri foto IKAPTRI Tourism Fair 2027. Brosur, e-flyer, floor plan, dan company profile tersedia untuk diunduh." />
+  <meta property="og:url" content="https://ikaptritourismfair.com/media" />
+  <meta property="og:image" content="https://ikaptritourismfair.com/assets/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="id_ID" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Media — IKAPTRI Tourism Fair 2027" />
+  <meta name="twitter:description" content="Media kit, berita, dan galeri foto IKAPTRI Tourism Fair 2027. Brosur, e-flyer, floor plan, dan company profile tersedia untuk diunduh." />
+  <meta name="twitter:image" content="https://ikaptritourismfair.com/assets/images/og-image.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ============================== TOP BAR ============================== -->
+  <div class="topbar">
+    <a href="index.html" class="topbar__logo">
+      <img src="assets/images/logo.png" alt="IKAPTRI Tourism Fair 2027" />
+    </a>
+    <div class="topbar__partners">
+      <div class="partner-group">
+        <span class="partner-group__label">Diselenggarakan Oleh:</span>
+        <div class="partner-group__logos">
+          <img src="assets/images/diselenggarakan-logos.png" alt="Institut Pariwisata Trisakti & IKAPTRI" />
+        </div>
+      </div>
+      <div class="partner-group">
+        <span class="partner-group__label">Pelaksana:</span>
+        <div class="partner-group__logos">
+          <img src="assets/images/pelaksana-logos.png" alt="Enhaiier Corporation & Satu Matahari" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== NAVBAR ============================== -->
+  <header class="navbar">
+    <button class="navbar__toggle" data-nav-toggle aria-label="Buka menu">&#9776;</button>
+    <ul class="navbar__list" data-nav-list>
+      <li><a href="index.html">BERANDA</a></li>
+      <li><a href="eksibitor.html">EKSIBITOR</a></li>
+      <li><a href="pengunjung.html">PENGUNJUNG</a></li>
+      <li><a href="program.html">PROGRAM</a></li>
+      <li><a href="media.html" class="is-active">MEDIA</a></li>
+    </ul>
+    <a href="registrasi.html" class="navbar__cta">REGISTRASI PESERTA</a>
+  </header>
+
+  <!-- ============================== MEDIA HERO ============================== -->
+  <section class="media-hero">
+    <h1>MEDIA</h1>
+  </section>
+
+  <!-- ============================== MEDIA KIT ============================== -->
+  <section class="mediakit-section container">
+    <h2>Media Kit</h2>
+    <div class="mediakit-grid" data-media-kit></div>
+  </section>
+
+  <!-- ============================== NEWS ============================== -->
+  <section class="news-section container">
+    <h2>News</h2>
+    <div class="news-grid" data-news-list></div>
+  </section>
+
+  <!-- ============================== GALLERY ============================== -->
+  <section class="gallery-section container">
+    <h2>Gallery</h2>
+    <div class="gallery-grid" data-gallery></div>
+  </section>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <h3 class="footer__title">Contact Person</h3>
+        <div data-contact-list></div>
+      </div>
+      <div>
+        <div class="footer__org-label">Organized by:</div>
+        <img src="assets/images/satu-matahari-white.png" alt="Satu Matahari" style="height:52px;margin-bottom:24px" />
+        <h3 class="footer__office-title">Office</h3>
+        <p data-office-address></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
