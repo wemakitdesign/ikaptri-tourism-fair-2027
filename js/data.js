@@ -380,6 +380,7 @@ const IKAPTRI_DATA = {
       content:
         "Laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
       image: "assets/images/news-1.jpg",
+      date: "2026-09-10",
     },
     {
       title: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut",
@@ -388,6 +389,7 @@ const IKAPTRI_DATA = {
       content:
         "Laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
       image: "assets/images/news-2.jpg",
+      date: "2026-09-05",
     },
     {
       title: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut",
@@ -396,6 +398,7 @@ const IKAPTRI_DATA = {
       content:
         "Laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
       image: "assets/images/news-3.jpg",
+      date: "2026-08-28",
     },
   ],
 

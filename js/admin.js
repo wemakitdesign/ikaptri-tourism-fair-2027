@@ -495,7 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------------------------------------------------------- */
   async function loadNews() {
     const listEl = document.querySelector("[data-news-list]");
-    const { data } = await supabaseClient.from("news_items").select("*").order("sort_order");
+    const { data } = await supabaseClient.from("news_items").select("*").order("created_at", { ascending: false });
 
     if (!data || !data.length) {
       listEl.innerHTML = `<p class="admin-empty">Belum ada news item.</p>`;
@@ -570,7 +570,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------------------------------------------------------- */
   async function loadGallery() {
     const listEl = document.querySelector("[data-gallery-list]");
-    const { data } = await supabaseClient.from("gallery_photos").select("*").order("sort_order");
+    const { data } = await supabaseClient.from("gallery_photos").select("*").order("created_at", { ascending: false });
 
     if (!data || !data.length) {
       listEl.innerHTML = `<p class="admin-empty">Belum ada foto gallery.</p>`;

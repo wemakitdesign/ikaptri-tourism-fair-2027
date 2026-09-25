@@ -36,6 +36,7 @@ const ICONS = {
   flyer: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="12" height="16" rx="1"/><path d="M8 8h6M8 11h6M8 14h3"/><circle cx="17" cy="17" r="4"/><path d="m19.5 19.5 2 2"/></svg>',
   floorplan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 9v12"/><path d="M6 15h.01M6 12h.01"/></svg>',
   bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 0-4 4c0 4-2 5-2 7h12c0-2-2-3-2-7a4 4 0 0 0-4-4Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>',
+  calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>',
 };
 
 /**
@@ -55,8 +56,8 @@ async function hydrateFromSupabase() {
       supabaseClient.from("hero_slides").select("*").order("sort_order", { ascending: true }),
       supabaseClient.from("site_settings").select("*").in("key", ["countdown", "event"]),
       supabaseClient.from("contact_persons").select("*").order("sort_order", { ascending: true }),
-      supabaseClient.from("news_items").select("*").order("sort_order", { ascending: true }),
-      supabaseClient.from("gallery_photos").select("*").order("sort_order", { ascending: true }),
+      supabaseClient.from("news_items").select("*").order("created_at", { ascending: false }),
+      supabaseClient.from("gallery_photos").select("*").order("created_at", { ascending: false }),
       supabaseClient.from("media_kit").select("*"),
       supabaseClient.from("program_items").select("*").order("sort_order", { ascending: true }),
     ]);
@@ -86,6 +87,7 @@ async function hydrateFromSupabase() {
         excerpt: row.excerpt || "",
         content: row.content || row.excerpt || "",
         image: row.image_url || "",
+        date: row.created_at,
       }));
     }
 
@@ -908,15 +910,21 @@ async function downloadMediaKitFile(btn) {
 function renderNews() {
   const wrap = document.querySelector("[data-news-list]");
   if (!wrap) return;
+  const colors = ["navy", "orange", "teal"];
   wrap.innerHTML = IKAPTRI_DATA.newsItems
-    .map(
-      (n, i) => `
-      <article class="news-card" data-news-open="${i}">
-        <div class="news-card__img corner-cut" style="background-image:url('${n.image}')"></div>
-        <h4>${n.title}</h4>
-        <p>${n.excerpt}</p>
-      </article>`
-    )
+    .map((n, i) => {
+      const dateLabel = n.date
+        ? new Date(n.date).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })
+        : "";
+      return `
+      <article class="news-card news-card--${colors[i % colors.length]}" data-news-open="${i}">
+        <div class="news-card__img" style="background-image:url('${n.image}')"></div>
+        <div class="news-card__body">
+          <h4>${n.title}</h4>
+          ${dateLabel ? `<span class="news-card__date">${ICONS.calendar} ${dateLabel}</span>` : ""}
+        </div>
+      </article>`;
+    })
     .join("");
 
   wrap.querySelectorAll("[data-news-open]").forEach((card) => {
@@ -958,9 +966,49 @@ function openNewsModal(item) {
 function renderGallery() {
   const wrap = document.querySelector("[data-gallery]");
   if (!wrap) return;
-  wrap.innerHTML = IKAPTRI_DATA.galleryPhotos
-    .map(
-      (src) => `<div class="gallery-item corner-cut" style="background-image:url('${src}')"></div>`
-    )
-    .join("");
+
+  const PER_PAGE = 12;
+  const photos = IKAPTRI_DATA.galleryPhotos;
+  const totalPages = Math.max(1, Math.ceil(photos.length / PER_PAGE));
+  let currentPage = 1;
+
+  const pagerWrap = document.querySelector("[data-gallery-pager]");
+
+  function renderPage() {
+    const start = (currentPage - 1) * PER_PAGE;
+    const pagePhotos = photos.slice(start, start + PER_PAGE);
+    wrap.innerHTML = pagePhotos
+      .map((src) => `<div class="gallery-item corner-cut" style="background-image:url('${src}')"></div>`)
+      .join("");
+
+    if (pagerWrap) {
+      if (totalPages <= 1) {
+        pagerWrap.innerHTML = "";
+        return;
+      }
+      let pagesHtml = "";
+      for (let p = 1; p <= totalPages; p++) {
+        pagesHtml += `<button class="gallery-pager__page${p === currentPage ? " is-active" : ""}" data-gallery-page="${p}">${p}</button>`;
+      }
+      pagerWrap.innerHTML = `
+        <button class="gallery-pager__nav" data-gallery-prev ${currentPage === 1 ? "disabled" : ""}>&#8249;</button>
+        ${pagesHtml}
+        <button class="gallery-pager__nav" data-gallery-next ${currentPage === totalPages ? "disabled" : ""}>&#8250;</button>
+      `;
+
+      pagerWrap.querySelectorAll("[data-gallery-page]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          currentPage = parseInt(btn.dataset.galleryPage, 10);
+          renderPage();
+          wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+      const prevBtn = pagerWrap.querySelector("[data-gallery-prev]");
+      const nextBtn = pagerWrap.querySelector("[data-gallery-next]");
+      if (prevBtn) prevBtn.addEventListener("click", () => { if (currentPage > 1) { currentPage--; renderPage(); wrap.scrollIntoView({ behavior: "smooth", block: "start" }); } });
+      if (nextBtn) nextBtn.addEventListener("click", () => { if (currentPage < totalPages) { currentPage++; renderPage(); wrap.scrollIntoView({ behavior: "smooth", block: "start" }); } });
+    }
+  }
+
+  renderPage();
 }

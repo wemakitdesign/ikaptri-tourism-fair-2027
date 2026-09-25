@@ -110,8 +110,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .partner-group__logos {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
+
+.partner-group__logos a {
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
+}
+
+.partner-group__logos a:hover { opacity: 0.75; }
 
 .partner-group__logos img {
   height: 40px;
@@ -620,6 +628,44 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: 60px 0 30px;
   text-align: center;
   background: #ffffff;
+}
+
+.partners__group {
+  display: inline-block;
+  margin: 0 40px 36px;
+  vertical-align: top;
+}
+
+.partners__label {
+  display: block;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--navy-deep);
+  margin-bottom: 18px;
+}
+
+.partners__logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+}
+
+.partners__logos a {
+  display: flex;
+  align-items: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.partners__logos a:hover {
+  opacity: 0.75;
+  transform: translateY(-2px);
+}
+
+.partners__logos img {
+  height: 92px;
+  width: auto;
+  object-fit: contain;
 }
 
 .partners__row {
@@ -1549,31 +1595,51 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 .news-card {
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
-.news-card:hover { transform: translateY(-4px); }
+.news-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
 
 .news-card__img {
-  height: 200px;
+  height: 190px;
   background-size: cover;
   background-position: center;
-  margin-bottom: 16px;
 }
+
+.news-card__body {
+  padding: 20px 22px 24px;
+  color: var(--white);
+}
+
+.news-card--navy .news-card__body { background: var(--navy); }
+.news-card--orange .news-card__body { background: var(--orange); }
+.news-card--teal .news-card__body { background: var(--teal); }
 
 .news-card h4 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--navy-deep);
-  margin-bottom: 10px;
-  line-height: 1.35;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 14px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.news-card p {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.5;
+.news-card__date {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.9;
 }
+
+.news-card__date svg { width: 15px; height: 15px; flex: none; }
 
 /* ---------------- NEWS MODAL ---------------- */
 
@@ -1664,6 +1730,51 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   height: 190px;
   background-size: cover;
   background-position: center;
+}
+
+.gallery-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.gallery-pager__page {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: var(--off-white);
+  color: var(--navy-deep);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.gallery-pager__page:hover { background: #e2ecf7; }
+
+.gallery-pager__page.is-active {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.gallery-pager__nav {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--off-white);
+  color: var(--navy-deep);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-pager__nav:hover { background: #e2ecf7; }
+
+.gallery-pager__nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .corner-cut {
@@ -2142,6 +2253,9 @@ body {
   .navbar__list.is-open { display: flex; }
   .navbar__cta { margin-left: auto; }
   .topbar { justify-content: center; text-align: center; padding-top: 10px; padding-bottom: 10px; }
+  .partners__group { margin: 0 18px 28px; }
+  .partners__logos { gap: 16px; }
+  .partners__logos img { height: 60px; }
   .topbar__logo img { height: 52px; }
   .topbar__partners { display: none; }
   .hero { min-height: 520px; }
