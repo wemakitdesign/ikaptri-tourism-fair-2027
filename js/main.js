@@ -37,6 +37,10 @@ const ICONS = {
   floorplan: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 9v12"/><path d="M6 15h.01M6 12h.01"/></svg>',
   bell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 0-4 4c0 4-2 5-2 7h12c0-2-2-3-2-7a4 4 0 0 0-4-4Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>',
   calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>',
+  instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>',
+  facebook: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14 8.5h-1.5A1.5 1.5 0 0 0 11 10v2M9 12h4M12.5 12v6.5"/></svg>',
+  tiktok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v10.8a3.3 3.3 0 1 1-2.8-3.26"/><path d="M14 3.5c.4 2.3 2.1 4 4.5 4.3"/></svg>',
+  threads: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 11.5c0-2-1.3-3.2-3.2-3.2-2 0-3.3 1.3-3.3 3.3 0 1.9 1.3 3.1 3.1 3.4 2.4.4 3.4 1.2 3.4 2.6 0 1.5-1.3 2.4-3.1 2.4-1.6 0-2.8-.7-3.2-1.9"/></svg>',
 };
 
 /**
@@ -131,6 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderGoals();
   renderConcept();
   renderFooter();
+  renderSocialLinks();
 
   initMobileNav();
   initHeroSlider();
@@ -246,6 +251,19 @@ function renderFooter() {
 
   const officeAddr = document.querySelector("[data-office-address]");
   if (officeAddr) officeAddr.textContent = IKAPTRI_DATA.office.address;
+}
+
+function renderSocialLinks() {
+  const wrap = document.querySelector("[data-social-links]");
+  if (!wrap) return;
+  wrap.innerHTML = IKAPTRI_DATA.socialLinks
+    .map(
+      (s) => `
+      <a href="${s.url}" target="_blank" rel="noopener" class="footer__social" aria-label="${s.label}">
+        ${ICONS[s.platform] || ""}
+      </a>`
+    )
+    .join("");
 }
 
 /* ---------------------------------------------------------------- */
@@ -978,8 +996,15 @@ function renderGallery() {
     const start = (currentPage - 1) * PER_PAGE;
     const pagePhotos = photos.slice(start, start + PER_PAGE);
     wrap.innerHTML = pagePhotos
-      .map((src) => `<div class="gallery-item corner-cut" style="background-image:url('${src}')"></div>`)
+      .map(
+        (src, i) =>
+          `<div class="gallery-item corner-cut" style="background-image:url('${src}')" data-gallery-open="${start + i}"></div>`
+      )
       .join("");
+
+    wrap.querySelectorAll("[data-gallery-open]").forEach((el) => {
+      el.addEventListener("click", () => openGalleryModal(parseInt(el.dataset.galleryOpen, 10)));
+    });
 
     if (pagerWrap) {
       if (totalPages <= 1) {
@@ -1011,4 +1036,53 @@ function renderGallery() {
   }
 
   renderPage();
+}
+
+let galleryModalIndex = 0;
+
+function openGalleryModal(index) {
+  const photos = IKAPTRI_DATA.galleryPhotos;
+  galleryModalIndex = index;
+
+  let modal = document.querySelector("[data-gallery-modal]");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.setAttribute("data-gallery-modal", "");
+    modal.className = "gallery-modal";
+    modal.innerHTML = `
+      <div class="gallery-modal__backdrop" data-gallery-modal-close></div>
+      <button class="gallery-modal__close" data-gallery-modal-close aria-label="Tutup">&times;</button>
+      <button class="gallery-modal__nav gallery-modal__nav--prev" data-gallery-modal-prev aria-label="Sebelumnya">&#8249;</button>
+      <img class="gallery-modal__img" data-gallery-modal-img alt="Gallery preview" />
+      <button class="gallery-modal__nav gallery-modal__nav--next" data-gallery-modal-next aria-label="Berikutnya">&#8250;</button>
+    `;
+    document.body.appendChild(modal);
+
+    modal.querySelectorAll("[data-gallery-modal-close]").forEach((el) =>
+      el.addEventListener("click", () => modal.classList.remove("is-open"))
+    );
+    modal.querySelector("[data-gallery-modal-prev]").addEventListener("click", () => {
+      const total = IKAPTRI_DATA.galleryPhotos.length;
+      galleryModalIndex = (galleryModalIndex - 1 + total) % total;
+      updateGalleryModalImg(modal);
+    });
+    modal.querySelector("[data-gallery-modal-next]").addEventListener("click", () => {
+      const total = IKAPTRI_DATA.galleryPhotos.length;
+      galleryModalIndex = (galleryModalIndex + 1) % total;
+      updateGalleryModalImg(modal);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (!modal.classList.contains("is-open")) return;
+      if (e.key === "Escape") modal.classList.remove("is-open");
+      if (e.key === "ArrowLeft") modal.querySelector("[data-gallery-modal-prev]").click();
+      if (e.key === "ArrowRight") modal.querySelector("[data-gallery-modal-next]").click();
+    });
+  }
+
+  updateGalleryModalImg(modal);
+  modal.classList.add("is-open");
+}
+
+function updateGalleryModalImg(modal) {
+  modal.querySelector("[data-gallery-modal-img]").src = IKAPTRI_DATA.galleryPhotos[galleryModalIndex];
 }

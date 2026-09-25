@@ -192,6 +192,13 @@ const IKAPTRI_DATA = {
     message: "Halo, saya tertarik dengan IKAPTRI Tourism Fair 2027",
   },
 
+  socialLinks: [
+    { platform: "instagram", label: "Instagram", url: "https://www.instagram.com/ikaptritourism.fair/" },
+    { platform: "facebook", label: "Facebook", url: "https://www.facebook.com/share/1DE9n8kByJ/" },
+    { platform: "tiktok", label: "TikTok", url: "https://www.tiktok.com/@ikaptritourism.fa" },
+    { platform: "threads", label: "Threads", url: "https://www.threads.com/@ikaptritourism.fair" },
+  ],
+
   office: {
     label: "Office",
     address:
