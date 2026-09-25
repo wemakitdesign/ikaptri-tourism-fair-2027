@@ -509,7 +509,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img class="admin-card__thumb" src="${n.image_url || ""}" alt="${n.title}" />
         <div class="admin-card__body">
           <strong>${n.title}</strong>
-          <span>${n.excerpt ? n.excerpt.slice(0, 60) + (n.excerpt.length > 60 ? "..." : "") : "Tanpa ringkasan"}</span>
+          <span>${n.content ? n.content.slice(0, 60) + (n.content.length > 60 ? "..." : "") : "Tanpa isi"}</span>
         </div>
         <div class="admin-card__actions">
           <button class="admin-btn--danger" data-news-delete title="Hapus">✕</button>
@@ -532,7 +532,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = e.target;
     const statusEl = document.querySelector("[data-news-status]");
     const title = document.querySelector("[data-news-title]").value.trim();
-    const excerpt = document.querySelector("[data-news-excerpt]").value.trim();
     const content = document.querySelector("[data-news-content]").value.trim();
     const file = document.querySelector("[data-news-image]").files[0];
 
@@ -551,7 +550,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const { error } = await supabaseClient
         .from("news_items")
-        .insert([{ title, excerpt, content, image_url: imageUrl, sort_order: nextOrder }]);
+        .insert([{ title, content, image_url: imageUrl, sort_order: nextOrder }]);
 
       if (error) throw error;
 

@@ -967,7 +967,7 @@ function renderGallery() {
   const wrap = document.querySelector("[data-gallery]");
   if (!wrap) return;
 
-  const PER_PAGE = 12;
+  const PER_PAGE = 9;
   const photos = IKAPTRI_DATA.galleryPhotos;
   const totalPages = Math.max(1, Math.ceil(photos.length / PER_PAGE));
   let currentPage = 1;
