@@ -2165,6 +2165,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   transform: scaleY(-1);
 }
 
+.section-frame--navy {
+  background: var(--navy);
+}
+
 /* ==========================================================================
    REGISTRASI VISITOR (Pengunjung page)
    ========================================================================== */
