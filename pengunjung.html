@@ -45,7 +45,7 @@
     </a>
     <div class="topbar__partners">
       <div class="partner-group">
-        <span class="partner-group__label">Diselenggarakan Oleh:</span>
+        <span class="partner-group__label">Penyelenggara:</span>
         <div class="partner-group__logos">
           <a href="https://iptrisakti.ac.id/" target="_blank" rel="noopener"><img src="assets/images/logo-institut.png" alt="Institut Pariwisata Trisakti" /></a>
           <a href="https://ikaptriofficial.com/" target="_blank" rel="noopener"><img src="assets/images/logo-ikaptri.png" alt="IKAPTRI" /></a>
@@ -66,7 +66,7 @@
     <button class="navbar__toggle" data-nav-toggle aria-label="Buka menu">&#9776;</button>
     <ul class="navbar__list" data-nav-list>
       <li><a href="index.html">BERANDA</a></li>
-      <li><a href="eksibitor.html">EKSIBITOR</a></li>
+      <li><a href="eksibitor.html">PAMERAN</a></li>
       <li><a href="pengunjung.html" class="is-active">PENGUNJUNG</a></li>
       <li><a href="program.html">PROGRAM</a></li>
       <li><a href="media.html">MEDIA</a></li>
@@ -79,21 +79,13 @@
   <!-- ============================== TERBUKA UNTUK UMUM (banner) ============================== -->
   <section class="pengunjung-banner" style="background-image:url('assets/images/pengunjung-banner.jpg')"></section>
 
-  <!-- ============================== 5 EXPERIENCE ZONES ============================== -->
-  <div class="zones-intro">
-    <h3>5 Zona Eksplorasi</h3>
-    <p>1 Perjalanan Luar Biasa</p>
-  </div>
-
-  <section class="zones-wrap container">
-    <div class="zones-slider">
-      <button class="zones-slider__nav zones-slider__nav--prev" data-zones-prev aria-label="Zone sebelumnya">&#8249;</button>
-      <div class="zones-slider__viewport">
-        <div class="zones-slider__track" data-experience-zones></div>
-      </div>
-      <button class="zones-slider__nav zones-slider__nav--next" data-zones-next aria-label="Zone berikutnya">&#8250;</button>
+  <!-- ============================== REGISTRASI VISITOR ============================== -->
+  <section class="registrasi-visitor">
+    <div class="container registrasi-visitor__inner">
+      <h2>Daftar Sebagai Pengunjung</h2>
+      <p>Kunjungi IKAPTRI Tourism Fair 2027 — nikmati exhibition, workshop, business matching, hingga gala dinner. Cukup daftar sebentar, dan kamu siap hadir.</p>
+      <a href="registrasi.html?kategori=pengunjung" class="registrasi-visitor__btn">Daftar Sebagai Pengunjung</a>
     </div>
-    <div class="zones-dots" data-zones-dots></div>
   </section>
 
   <div class="section-frame">
@@ -127,8 +119,8 @@
     <img src="assets/images/hero-frame.png" alt="" />
   </div>
 
-  <!-- ============================== DATE / VENUE / HOURS ============================== -->
-  <section class="event-meta container">
+  <!-- ============================== DATE / VENUE / HOURS — DI-HIDE ============================== -->
+  <section class="event-meta container" hidden>
     <div class="event-meta__row">
       <div class="event-meta__item">
         <div class="event-meta__icon">
@@ -154,15 +146,15 @@
   <footer class="footer">
     <div class="container footer__grid">
       <div>
-        <h3 class="footer__title">Contact Person</h3>
+        <h3 class="footer__title">Narahubung</h3>
         <div data-contact-list></div>
         <div class="footer__social-label">Ikuti Kami:</div>
         <div class="footer__socials" data-social-links></div>
       </div>
       <div>
-        <div class="footer__org-label">Organized by:</div>
+        <div class="footer__org-label">Pelaksana:</div>
         <a href="http://satu-matahari.com/" target="_blank" rel="noopener"><img src="assets/images/satu-matahari-white.png" alt="Satu Matahari" style="height:52px;margin-bottom:24px" /></a>
-        <h3 class="footer__office-title">Office</h3>
+        <h3 class="footer__office-title">Kantor</h3>
         <p data-office-address></p>
       </div>
     </div>

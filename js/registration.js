@@ -21,6 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const submitBtn = form.querySelector("[data-submit-btn]");
   const statusBox = document.querySelector("[data-form-status]");
 
+  // Pre-select kategori kalau datang dari link kayak registrasi.html?kategori=pengunjung
+  const presetCategory = new URLSearchParams(window.location.search).get("kategori");
+  if (presetCategory && form.category) {
+    const optionExists = Array.from(form.category.options).some((o) => o.value === presetCategory);
+    if (optionExists) form.category.value = presetCategory;
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     clearErrors(form);

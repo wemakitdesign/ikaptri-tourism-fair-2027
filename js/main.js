@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   initHeroSlider();
   initPillarSlider();
   renderWhatsappFloat();
+  renderSalesCta();
   initCountdown();
 
   // eksibitor page
@@ -331,6 +332,16 @@ function renderWhatsappFloat() {
   if (!el) return;
   const { phone, message } = IKAPTRI_DATA.whatsapp;
   el.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+}
+
+function renderSalesCta() {
+  const el = document.querySelector("[data-sales-cta]");
+  if (!el) return;
+  const { phone } = IKAPTRI_DATA.whatsapp;
+  const message = "Halo, saya tertarik untuk jadi eksibitor di IKAPTRI Tourism Fair 2027. Boleh minta info lebih lanjut?";
+  el.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  el.target = "_blank";
+  el.rel = "noopener";
 }
 
 /* ---------------------------------------------------------------- */

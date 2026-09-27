@@ -46,7 +46,7 @@
 
     <div class="topbar__partners">
       <div class="partner-group">
-        <span class="partner-group__label">Diselenggarakan Oleh:</span>
+        <span class="partner-group__label">Penyelenggara:</span>
         <div class="partner-group__logos">
           <a href="https://iptrisakti.ac.id/" target="_blank" rel="noopener"><img src="assets/images/logo-institut.png" alt="Institut Pariwisata Trisakti" /></a>
           <a href="https://ikaptriofficial.com/" target="_blank" rel="noopener"><img src="assets/images/logo-ikaptri.png" alt="IKAPTRI" /></a>
@@ -67,7 +67,7 @@
     <button class="navbar__toggle" data-nav-toggle aria-label="Buka menu">&#9776;</button>
     <ul class="navbar__list" data-nav-list>
       <li><a href="index.html">BERANDA</a></li>
-      <li><a href="eksibitor.html" class="is-active">EKSIBITOR</a></li>
+      <li><a href="eksibitor.html" class="is-active">PAMERAN</a></li>
       <li><a href="pengunjung.html">PENGUNJUNG</a></li>
       <li><a href="program.html">PROGRAM</a></li>
       <li><a href="media.html">MEDIA</a></li>
@@ -75,19 +75,19 @@
     <a href="registrasi.html" class="navbar__cta">REGISTRASI PESERTA</a>
   </header>
 
-  <!-- ============================== SELAYANG PANDANG (page hero) ============================== -->
-  <section class="page-hero" data-eksibitor-hero></section>
+  <!-- ============================== SELAYANG PANDANG (page hero) — DI-HIDE, restore dgn hapus attribute hidden ============================== -->
+  <section class="page-hero" data-eksibitor-hero hidden></section>
 
-  <!-- ============================== 3 CORE PILLARS ============================== -->
-  <section class="core-pillars">
+  <!-- ============================== 3 CORE PILLARS (sekarang jadi hero halaman) ============================== -->
+  <section class="core-pillars core-pillars--as-hero">
     <div class="container">
       <h2>3 Pilar Utama</h2>
       <div class="core-pillars__grid" data-core-pillars></div>
     </div>
   </section>
 
-  <!-- ============================== CLUSTER HIGHLIGHT ============================== -->
-  <section class="cluster-section container">
+  <!-- ============================== CLUSTER HIGHLIGHT — DI-HIDE ============================== -->
+  <section class="cluster-section container" hidden>
     <h2>Klaster Pameran</h2>
     <div class="cluster-section__grid" data-clusters></div>
   </section>
@@ -108,8 +108,8 @@
     </div>
   </section>
 
-  <!-- ============================== KEY HIGHLIGHTS / VALUE PROPOSITION ============================== -->
-  <section class="info-boxes container">
+  <!-- ============================== KEY HIGHLIGHTS / VALUE PROPOSITION — DI-HIDE ============================== -->
+  <section class="info-boxes container" hidden>
     <div class="info-boxes__grid">
       <div data-key-highlights></div>
       <div data-value-proposition></div>
@@ -139,7 +139,7 @@
 
   <!-- ============================== FLOORPLAN ============================== -->
   <section class="floorplan container">
-    <h2>Booth Packages</h2>
+    <h2>Layout</h2>
     <div class="floorplan__grid">
       <div class="floorplan__col">
         <h3>Astaka Grand Ballroom</h3>
@@ -152,22 +152,25 @@
     </div>
   </section>
 
-  <!-- ============================== REGISTRASI CTA ============================== -->
-  <a href="registrasi.html" class="registrasi-cta">REGISTRASI PESERTA PAMERAN</a>
+  <!-- ============================== SALES CTA ============================== -->
+  <a href="#" data-sales-cta class="registrasi-cta registrasi-cta--sales">
+    <span class="registrasi-cta__main">Hadirkan Brand Anda di IKAPTRI Tourism Fair</span>
+    <span class="registrasi-cta__sub">klik kontak sales</span>
+  </a>
 
   <!-- ============================== FOOTER ============================== -->
   <footer class="footer">
     <div class="container footer__grid">
       <div>
-        <h3 class="footer__title">Contact Person</h3>
+        <h3 class="footer__title">Narahubung</h3>
         <div data-contact-list></div>
         <div class="footer__social-label">Ikuti Kami:</div>
         <div class="footer__socials" data-social-links></div>
       </div>
       <div>
-        <div class="footer__org-label">Organized by:</div>
+        <div class="footer__org-label">Pelaksana:</div>
         <a href="http://satu-matahari.com/" target="_blank" rel="noopener"><img src="assets/images/satu-matahari-white.png" alt="Satu Matahari" style="height:52px;margin-bottom:24px" /></a>
-        <h3 class="footer__office-title">Office</h3>
+        <h3 class="footer__office-title">Kantor</h3>
         <p data-office-address></p>
       </div>
     </div>
