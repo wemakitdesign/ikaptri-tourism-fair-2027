@@ -366,7 +366,7 @@ const IKAPTRI_DATA = {
   operatingHours: "10:00 - 21:00",
 
   // ================= PROGRAM PAGE =================
-  // Kosong = halaman Program tampil badge "(TBA)". Begitu admin
+  // Kosong = halaman Program tanpa jadwal (langsung 5 Zona). Begitu admin
   // nambah sesi lewat CMS, array ini otomatis keisi (lihat
   // hydrateFromSupabase() di main.js) dan halaman ganti jadi jadwal.
   programItems: [],

@@ -1952,6 +1952,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   text-align: center;
 }
 
+.program-tba--empty {
+  padding: 70px 0 10px;
+}
+
+.program-tba.program-tba--empty h1 {
+  margin-bottom: 0;
+}
+
 .program-tba h1 {
   font-size: 34px;
   font-weight: 800;

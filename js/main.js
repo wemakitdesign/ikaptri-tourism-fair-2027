@@ -824,11 +824,16 @@ function renderProgramContent() {
   if (!wrap) return;
 
   const items = IKAPTRI_DATA.programItems;
+  const section = wrap.closest("section");
 
+  // Kosong = tidak ada badge apa-apa (halaman Program langsung lanjut ke
+  // section 5 Zona Eksplorasi). Begitu admin nambah sesi, jadwal muncul.
   if (!items || !items.length) {
-    wrap.innerHTML = `<span class="program-tba__badge">(TBA)</span>`;
+    wrap.innerHTML = "";
+    if (section) section.classList.add("program-tba--empty");
     return;
   }
+  if (section) section.classList.remove("program-tba--empty");
 
   // kelompokin per hari, urutan tetap ngikutin urutan data (sort_order)
   const days = [];

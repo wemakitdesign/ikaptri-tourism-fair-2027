@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .order("sort_order", { ascending: true });
 
     if (!data || !data.length) {
-      listEl.innerHTML = `<p class="admin-empty">Belum ada sesi. Halaman Program di website masih tampil "(TBA)".</p>`;
+      listEl.innerHTML = `<p class="admin-empty">Belum ada sesi. Halaman Program di website menampilkan 5 Zona Eksplorasi saja.</p>`;
       return;
     }
 
